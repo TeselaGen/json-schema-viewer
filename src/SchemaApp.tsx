@@ -147,13 +147,13 @@ const HelpMenu: React.FC<ContentPropsWithClose> = (props) => {
       </Section>
       <Section title="Contribute">
         <NewTabLinkItem
-          href="https://github.com/tnrich/json-schema-viewer/issues/new"
+          href="https://github.com/teselagen/json-schema-viewer/issues/new"
           onClick={props.closePopup}
         >
           Raise issue
         </NewTabLinkItem>
         <NewTabLinkItem
-          href="https://github.com/tnrich/json-schema-viewer"
+          href="https://github.com/teselagen/json-schema-viewer"
           onClick={props.closePopup}
         >
           View source code

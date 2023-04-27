@@ -1,6 +1,6 @@
 # json-schema-viewer
 
-Welcome to Teselagen's JSON Schema Viewer! (All credit for the original functionality goes to https://github.com/tnrich/json-schema-viewer)
+Welcome to Teselagen's JSON Schema Viewer! (All credit for the original functionality goes to https://github.com/teselagen/json-schema-viewer)
 
 This site is used to host and view JSON Schemas for Teselagen's software.
 
@@ -29,11 +29,13 @@ For example schemas, please see: https://www.schemastore.org/json/
 
 Now open: http://localhost:8081 to see the site and develop it live.
 
+Hit cmd+shift+r to reload the page without caching to see the changes you've made to the code
+
 ## Deployment
 
 1. Make sure you've run the project locally to get the built files.
 2. Commit your changes (their should be changes under the built docs folder)
 3. Push to master
 
-This should update the gh pages site here https://tnrich.github.io/json-schema-viewer
+This should update the gh pages site here https://teselagen.github.io/json-schema-viewer
 

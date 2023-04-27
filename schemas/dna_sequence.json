@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/tnrich/json-schema-viewer/master/schemas/dna_sequence.json",
+  "$id": "https://raw.githubusercontent.com/teselagen/json-schema-viewer/master/schemas/dna_sequence.json",
   "title": "DNA Sequence",
   "type": "object",
   "description": "Teselagen's JSON representation of a DNA sequence with annotations and primers",

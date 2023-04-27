@@ -21,7 +21,7 @@ with other people.
 And that's all that there is to it! If you want to contribute fixes back to the project, or raise issues, the
 [source code for this project is in GitHub][1].
 
- [1]: https://github.com/tnrich/json-schema-viewer
+ [1]: https://github.com/teselagen/json-schema-viewer
  [2]: https://img.shields.io/npm/v/@apidevtools/json-schema-ref-parser?label=@apidevtools/json-schema-ref-parser&logo=npm
  [3]: https://www.npmjs.com/package/@apidevtools/json-schema-ref-parser
- [4]: https://github.com/tnrich/json-schema-viewer/issues/7
+ [4]: https://github.com/teselagen/json-schema-viewer/issues/7
