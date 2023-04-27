@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/tnrich/json-schema-viewer/master/schemas/design.json",
+  "description": "A schema for a Design object in the Teselagen application. Designs are used to put fragments of DNA sequences together in a specific order. They can either be a combinatorial design or a list design (1 row = 1 construct).",
+  "type": "object",
+  "title": "Design",
+  "properties": {
+    "name": {
+      "type": "string",
+      "examples": ["my custom design", "example design"]
+    },
+    "sequences": {
+      "description": "Optionally provide a list of sequences + associated parts. These parts are referenced by columns.parts and by the eugene_rules by id.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "parts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "start": { "type": "integer", "minimum": 0 },
+                "end": { "type": "integer", "minimum": 0 },
+                "id": { "type": "string", "examples": ["id1"] },
+                "strand": {
+                  "type": "integer",
+                  "enum": [-1, 1]
+                }
+              },
+              "required": ["name", "start", "end"]
+            }
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "notes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                },
+                "type": { "type": "string" },
+                "id": { "type": "string", "required": false },
+                "strand": {
+                  "type": "integer",
+                  "enum": [-1, 1]
+                },
+                "name": { "type": "string" },
+                "start": { "type": "integer", "minimum": 0 },
+                "end": { "type": "integer", "minimum": 0 },
+                "locations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "start": { "type": "integer", "minimum": 0 },
+                      "end": { "type": "integer", "minimum": 0 }
+                    },
+                    "required": ["start", "end"]
+                  }
+                }
+              },
+              "required": ["notes", "type", "strand", "name", "start", "end"]
+            }
+          },
+          "name": { "type": "string", "examples": ["seq1"] },
+          "sequence": {
+            "type": "string",
+            "examples": ["gtagtagtagtagttcgagagcatacccccc"]
+          }
+        },
+        "required": ["name", "sequence"]
+      }
+    },
+
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "examples": ["column 0", "column 1", "column 2"]
+          },
+          "icon": {
+            "type": "string",
+            "enum": [
+              "USER-DEFINED",
+              "ASSEMBLY_JUNCTION",
+              "BLUNT_RESTRICTION_SITE",
+              "CDS",
+              "FIVE_PRIME_OVERHANG",
+              "FIVE_PRIME_UTR",
+              "FIVE_PRIME_RESTRICTION_SITE",
+              "INSULATOR",
+              "OPERATOR_SITE",
+              "ORIGIN_OF_REPLICATION",
+              "PRIMER_BINDING_SITE",
+              "PROMOTER",
+              "PROTEASE_SITE",
+              "PROTEIN_STABILITY_ELEMENT",
+              "RESTRICTION_ENZYME_RECOGNITION_SITE",
+              "RIBONUCLEASE_SITE",
+              "RBS",
+              "RNA_STABILITY_ELEMENT",
+              "SIGNATURE",
+              "TERMINATOR",
+              "THREE_PRIME_OVERHANG",
+              "THREE_PRIME_RESTRICTION_SITE",
+              "Assembled Construct",
+              "Type IIs recognition site",
+              "Type IIs cutsite"
+            ]
+          },
+          "direction": {
+            "type": "string",
+            "enum": ["forward", "reverse"],
+            "examples": ["forward", "reverse"]
+          },
+          "parts": {
+            "description": "The parts in this column. Reference parts in the sequences you've passed in by id or reference existing parts by id or name",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "Identify existing parts by name",
+                  "type": "string",
+                  "examples": ["part A", "part B", "part C"]
+                },
+                "id": {
+                  "description": "Identify existing parts by id or link to incoming parts on sequences by id",
+                  "type": "string",
+                  "examples": ["id1", "id2", "id3"]
+                },
+                "forced_assembly_strategy": {
+                  "type": "string",
+                  "enum": [
+                    "DIGEST",
+                    "DIRECT_SYNTHESIS",
+                    "PCR",
+                    "EMBED_IN_PRIMER_FORWARD",
+                    "EMBED_IN_PRIMER_REVERSE",
+                    "ANNEALED_OLIGOS",
+                    "TOP_STRAND_OLIGO",
+                    "BOTTOM_STRAND_OLIGO",
+                    "ASSEMBLY_READY_FRAGMENT"
+                  ]
+                },
+                "isEmpty": {
+                  "type": "boolean",
+                  "default": false,
+                  "examples": [false],
+                  "description": "If true, this part is empty and will be skipped during assembly. Useful mostly in list design layouts"
+                }
+              },
+              "additionalProperties": false
+            },
+            "minItems": 1
+          },
+          "dsf": {
+            "type": "boolean",
+            "examples": [true, false]
+          }
+        },
+        "required": ["name", "icon", "direction", "parts"],
+        "additionalProperties": false
+      }
+    },
+    "assembly_method": {
+      "type": "string",
+      "enum": ["Gibson/SLIC/CPEC", "Golden Gate", "gateway"],
+      "examples": ["Gibson/SLIC/CPEC", "Golden Gate", "gateway"]
+    },
+    "restriction_enzyme": {
+      "type": ["string", "null"],
+      "examples": ["EcoRI", "BamHI", null]
+    },
+    "layout_type": {
+      "description": "In a list design, each row creates a single construct. In a combinatorial design, every possible permutation that includes at least one part in each column creates a construct.",
+      "type": "string",
+      "enum": ["list", "combinatorial"],
+      "examples": ["list", "combinatorial"]
+    },
+    "circular": {
+      "type": "boolean",
+      "examples": [true, false]
+    },
+    "eugene_rules": {
+      "description": "Optionally provide Eugene rules. https://j5.jbei.org/j5manual/pages/85.html",
+      "type": "array",
+      "items": {
+        "description": "A eugene rule",
+        "type": "object",
+        "required": ["operand1", "operand2", "compositional_operator"],
+        "properties": {
+          "operand1": {
+            "type": "string",
+            "examples": ["id1"],
+            "description": "The part_id the rule is acting on"
+          },
+          "operand2": {
+            "description": "The part_id the rule is acting on or if using the MORETHAN operator, the operand2 can be a number.",
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "The part_id the rule is acting on"
+              },
+              {
+                "type": "integer",
+                "description": "If using the MORETHAN operator, the operand2 can be a number.",
+                "minimum": 0
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "default": ""
+          },
+          "negation_operator": {
+            "description": "Optional rule negation operator. If truthy, the rule does the exact opposite of its original meaning",
+            "type": "boolean",
+            "default": false
+          },
+          "compositional_operator": {
+            "enum": ["AFTER", "BEFORE", "WITH", "THEN", "NEXTTO", "MORETHAN"]
+          }
+        }
+      }
+    }
+  },
+  "required": ["name", "columns", "assembly_method", "layout_type", "circular"],
+  "additionalProperties": false
+}
