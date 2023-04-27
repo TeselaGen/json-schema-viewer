@@ -4,7 +4,7 @@ Welcome to Teselagen's JSON Schema Viewer! (All credit for the original function
 
 This site is used to host and view JSON Schemas for Teselagen's software.
 
-Try it out today at: https://json-schema.app
+Try it out today at: https://teselagen.github.io/json-schema-viewer
 
 ## Adding a schema
 
