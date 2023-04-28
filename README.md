@@ -39,3 +39,4 @@ Hit cmd+shift+r to reload the page without caching to see the changes you've mad
 
 This should update the gh pages site here https://teselagen.github.io/json-schema-viewer
 
+
