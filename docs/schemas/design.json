@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/tnrich/json-schema-viewer/master/schemas/design.json",
+  "$id": "https://raw.githubusercontent.com/teselagen/json-schema-viewer/master/schemas/design.json",
   "description": "A schema for a Design object in the Teselagen application. Designs are used to put fragments of DNA sequences together in a specific order. They can either be a combinatorial design or a list design (1 row = 1 construct).",
   "type": "object",
   "title": "Design",
